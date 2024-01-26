@@ -1,8 +1,8 @@
 "use strict";
 
 const db = require("../db.js");
-const { BadRequestError, NotFoundError } = require("../expressError");
 const Company = require("./company.js");
+const { BadRequestError, NotFoundError } = require("../expressError");
 const {
 	commonBeforeAll,
 	commonBeforeEach,
@@ -32,8 +32,8 @@ describe("create", function () {
 
 		const result = await db.query(
 			`SELECT handle, name, description, num_employees, logo_url
-           FROM companies
-           WHERE handle = 'new'`
+			FROM companies
+			WHERE handle = 'new'`
 		);
 		expect(result.rows).toEqual([
 			{
@@ -86,48 +86,47 @@ describe("findAll", function () {
 			},
 		]);
 	});
-		
 
-		test("should filter companies by minEmployees", async () => {
-			const companies = await Company.findAll({ minEmployees: 2 });
-			expect(companies).toEqual([
-				{
-					handle: "c2",
-					name: "C2",
-					num_employees: 2,
-					description: "Desc2",
-					logo_url: "http://c2.img",
-				},
-				{
-					handle: "c3",
-					name: "C3",
-					num_employees: 3,
-					description: "Desc3",
-					logo_url: "http://c3.img",
-				},
-			]);
-		});
-
-		test("should filter companies by maxEmployees", async () => {
-			const companies = await Company.findAll({ maxEmployees: 2 });
-			expect(companies).toEqual([
-				{
-					handle: "c1",
-					name: "C1",
-					num_employees: 1,
-					description: "Desc1",
-					logo_url: "http://c1.img",
-				},
-				{
-					handle: "c2",
-					name: "C2",
-					num_employees: 2,
-					description: "Desc2",
-					logo_url: "http://c2.img",
-				},
-			]);
-		});
+	test("should filter companies by minEmployees", async () => {
+		const companies = await Company.findAll({ minEmployees: 2 });
+		expect(companies).toEqual([
+			{
+				handle: "c2",
+				name: "C2",
+				num_employees: 2,
+				description: "Desc2",
+				logo_url: "http://c2.img",
+			},
+			{
+				handle: "c3",
+				name: "C3",
+				num_employees: 3,
+				description: "Desc3",
+				logo_url: "http://c3.img",
+			},
+		]);
 	});
+
+	test("should filter companies by maxEmployees", async () => {
+		const companies = await Company.findAll({ maxEmployees: 2 });
+		expect(companies).toEqual([
+			{
+				handle: "c1",
+				name: "C1",
+				num_employees: 1,
+				description: "Desc1",
+				logo_url: "http://c1.img",
+			},
+			{
+				handle: "c2",
+				name: "C2",
+				num_employees: 2,
+				description: "Desc2",
+				logo_url: "http://c2.img",
+			},
+		]);
+	});
+});
 
 /************************************** get */
 
